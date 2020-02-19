@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="act_name">意外崩溃</string>
+    <string name="Crash_description">很抱歉，由于未知原因导致我们的应用崩溃了，您可以尝试重启APP或发送崩溃信息帮我们更快修复这个BUG,感谢您的支持！(注:崩溃信息不包含隐私数据，不会泄露您的任何隐私.)</string>
+    <string name="Show_Log">显示日志</string>
+    <string name="Copy_Log">复制日志</string>
+    <string name="Send_Log">发送日志</string>
+    <string name="Restart_App">重启应用</string>
+    <string name="Close_App">关闭应用</string>
+    <string name="Copyright_Information">uce_handler
+        Copyright © 2020 lian1581.All Rights Reserved.</string>
+    <string name="format_device_infor" formatted="false"><Data><![CDATA[**** 设备信息 ****<br><br>
+    设备厂商名:%s<br>
+    设备品牌:%s<br>
+    设备型号:%s<br>
+    设备名:%s<br>
+    主板名:%s<br>
+    系统版本:%s<br>
+    语言:%s<br><br>
+    **** 崩溃日志 ****<br><br>
+    ]]></Data>
+    </string>
+    <string name="Contact_Fail">发送失败，开发者可能忘了留下该联系方式了，试试其他的方式吧！</string>
+    <string name="Select_Mail_Application">请选择邮件应用</string>
+</resources>
