@@ -19,6 +19,6 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.lian1581:uce_handler:+'
+    implementation 'com.github.lian1581:uce_handler:1.+@aar'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
