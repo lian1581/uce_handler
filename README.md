@@ -12,7 +12,7 @@
 ```
 ## 添加依赖项
     dependencies {
-            implementation 'com.github.lian1581.uce_handler:uce_handler:Tag'
+            implementation 'com.github.lian1581.uce_handler:uce_handler:1.+'
     }
 **JitPack最新Tag:**
 [![](https://jitpack.io/v/lian1581/uce_handler.svg)](https://jitpack.io/#lian1581/uce_handler)
