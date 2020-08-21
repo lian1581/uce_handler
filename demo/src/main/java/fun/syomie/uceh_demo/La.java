@@ -9,8 +9,7 @@ public class La extends Application
     {
         super.onCreate();
 		/** init */
-        new UCEHandler.Builder(getBaseContext())
-        .build();
+        new UCEHandler.Builder(this).build();
 
     }
 }
