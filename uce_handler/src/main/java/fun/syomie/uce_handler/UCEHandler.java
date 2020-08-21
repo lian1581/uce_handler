@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.github.lian1581.uce_handler;
+package fun.syomie.uce_handler;
 
 import android.content.Context;
 import android.content.Intent;
@@ -107,7 +107,7 @@ public class UCEHandler implements Thread.UncaughtExceptionHandler
 
         // 跳转崩溃界面
         Intent intent = new Intent(mContext, LibraryActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtras(ie);
         mContext.startActivity(intent);
         return true;

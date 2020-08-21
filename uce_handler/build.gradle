@@ -1,16 +1,16 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'  
 
-group='com.github.lian1581'
+group='fun.syomie'
 
 android {
     compileSdkVersion 26
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 26
-        versionCode 3
-        versionName "1.0.3-beta"
+        targetSdkVersion 28
+        versionCode 4
+        versionName "1.1"
     }
     buildTypes {
         release {

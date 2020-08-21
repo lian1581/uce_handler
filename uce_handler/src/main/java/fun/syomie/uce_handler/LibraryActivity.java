@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.github.lian1581.uce_handler;
+package fun.syomie.uce_handler;
 
 import android.content.*;
 
@@ -38,11 +38,11 @@ public class LibraryActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.library);
-        Button btn1= (Button) findViewById(R.id.show),
-            btn2= (Button) findViewById(R.id.copy),
-            btn3= (Button) findViewById(R.id.send),
-            btn4= (Button) findViewById(R.id.restart),
-            btn5= (Button) findViewById(R.id.close);
+        Button btn1= findViewById(R.id.show),
+            btn2= findViewById(R.id.copy),
+            btn3= findViewById(R.id.send),
+            btn4= findViewById(R.id.restart),
+            btn5= findViewById(R.id.close);
         Intent i=getIntent();
         feedback = i.getStringExtra("feedback");
         eMail = i.getStringArrayExtra("eMail");
@@ -115,9 +115,9 @@ public class LibraryActivity extends Activity
         private void restartApplication()
         {  
             final Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());  
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);  
             startActivity(intent);
-
+            finish();
             /**杀死整个进程**/
             android.os.Process.killProcess(android.os.Process.myPid());
         }  
@@ -148,6 +148,7 @@ public class LibraryActivity extends Activity
                 ActivityManager.AppTask tk=(ActivityManager.AppTask) appTaskList.get(0);
                 tk.finishAndRemoveTask();
             }
+            finish();
             // 杀死整个进程
             android.os.Process.killProcess(android.os.Process.myPid());
         }

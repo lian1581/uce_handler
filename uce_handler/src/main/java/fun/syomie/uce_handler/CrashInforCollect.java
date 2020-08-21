@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.github.lian1581.uce_handler;
+package fun.syomie.uce_handler;
 
 import android.content.Context;
 import android.os.Build;

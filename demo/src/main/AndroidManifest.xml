@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.github.lian1581.uceh_demo" >
+    package="fun.syomie.uceh_demo" >
     <application
         android:name=".La"
         android:allowBackup="true"

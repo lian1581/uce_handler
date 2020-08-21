@@ -1,4 +1,4 @@
-package com.github.lian1581.uceh_demo;
+package fun.syomie.uceh_demo;
 
 import android.app.*;
 import android.os.*;
