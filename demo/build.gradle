@@ -19,6 +19,6 @@ android {
 }
 
 dependencies {
-	implementation 'fun.syomie:uce_handler:1.+@aar'
+	implementation 'com.github.syomie:uce_handler:1.+'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
