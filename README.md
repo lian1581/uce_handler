@@ -12,7 +12,7 @@
 ```
 ## 添加依赖项
     dependencies {
-            implementation 'fun.syomie.uce_handler:uce_handler:1.+' // 或者使用下方的最新版本
+            implementation 'com.github.syomie.uce_handler:uce_handler:1.1' // 或者使用下方的最新版本
     }
 **最新版本号:**
 [![](https://jitpack.io/v/syomie/uce_handler.svg)](https://jitpack.io/#syomie/uce_handler)
@@ -44,6 +44,3 @@
 // 默认 - 空
  =>  添加用,分隔的电子邮件地址，这些电子邮件地址将接收反馈邮件。
 *****
-## 
-用了段时间[RohitSurwase/UCE-Handler](https://github.com/RohitSurwase/UCE-Handler)**(推荐)**，决定参考它造个扳手玩……
-别人的轮子很好使，但自己的扳手更顺心
