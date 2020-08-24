@@ -18,43 +18,44 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_weight="1.0"
-		android:gravity="center|fill_vertical"
-		android:layout_margin="10dp">
+		android:gravity="center|fill_vertical">
 
 		<Button
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/Show_Log"
-			android:id="@+id/show"
-			android:layout_margin="10dp"/>
+			android:id="@+id/show"/>
 
 		<Button
-			android:layout_width="wrap_content"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:text="@string/Copy_Log"
-			android:id="@+id/copy"
-			android:layout_margin="10dp"/>
+			android:id="@+id/copy"/>
 
 		<Button
-			android:layout_width="wrap_content"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:text="@string/Send_Log"
-			android:id="@+id/send"
-			android:layout_margin="10dp"/>
+			android:id="@+id/send"/>
 
 		<Button
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:text="@string/Restart_App"
-			android:id="@+id/restart"
-			android:layout_margin="10dp"/>
+			android:id="@+id/restart"/>
+
+		<Button
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/otherButton"
+			android:visibility="visible"
+			android:text="@string/other"/>
 
 		<Button
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:text="@string/Close_App"
-			android:id="@+id/close"
-			android:layout_margin="10dp"/>
+			android:id="@+id/close"/>
 
 	</LinearLayout>
 

@@ -8,7 +8,7 @@
     <string name="Restart_App">重启应用</string>
     <string name="Close_App">关闭应用</string>
     <string name="Copyright_Information">uce_handler
-        Copyright © 2020 lian1581.All Rights Reserved.</string>
+        Copyright © 2020 syomie. All Rights Reserved.</string>
     <string name="format_device_infor" formatted="false"><Data><![CDATA[**** 设备信息 ****<br><br>
     设备厂商名:%s<br>
     设备品牌:%s<br>
@@ -20,6 +20,7 @@
     **** 崩溃日志 ****<br><br>
     ]]></Data>
     </string>
+	<string name="other">其它反馈</string>
     <string name="Contact_Fail">发送失败，开发者可能忘了留下该联系方式了，试试其他的方式吧！</string>
     <string name="Select_Mail_Application">请选择邮件应用</string>
 </resources>
