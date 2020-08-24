@@ -45,4 +45,4 @@
  =>  添加用,分隔的电子邮件地址，这些电子邮件地址将接收反馈邮件。
 ##### .setOtherInfo(name,uriString)
 // 默认-空，为空时不显示该项
- =>  自定义一个反馈渠道。例如:setOtherInfo("反馈Q群","https://jq.qq.com/?_wv=1027&k=xxxxxxxxxxxxxx")，
+ =>  自定义一个反馈渠道。例如:setOtherInfo("反馈Q群","https://jq.qq.com/?_wv=1027&k=xxxxxxxxxxxxxx")
