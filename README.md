@@ -36,11 +36,13 @@
     ```
 **注意在AndroidManifest.xml文件application标签中指向你的application类**
 
-### 构造时的可选参数
+### 构造时的可选设置
 ##### .setUCEHEnabled(true/false)
 //  默认 'true'
  =>  启用/禁用 UCE_Handler.
 ##### .setEmailAddresses("abc@qql.com, aaa@dd.com,..")
 // 默认 - 空
  =>  添加用,分隔的电子邮件地址，这些电子邮件地址将接收反馈邮件。
-*****
+##### .setOtherInfo(name,uriString)
+// 默认-空，为空时不显示该项
+ =>  自定义一个反馈渠道。例如:setOtherInfo("反馈Q群","https://jq.qq.com/?_wv=1027&k=xxxxxxxxxxxxxx")，
