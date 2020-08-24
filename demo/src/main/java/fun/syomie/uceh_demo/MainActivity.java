@@ -15,11 +15,16 @@ public class MainActivity extends Activity
                 @Override
                 public void run()
                 {
-                    try {
+                    try
+                    {
                         Thread.sleep(2000);
-                    } catch (InterruptedException e) {
+                    }
+                    catch (InterruptedException e)
+                    {
 
-                    } finally {
+                    }
+                    finally
+                    {
                         throw new RuntimeException("test");   
                     }
                 }

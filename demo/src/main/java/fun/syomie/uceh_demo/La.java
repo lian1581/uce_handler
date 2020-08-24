@@ -9,7 +9,7 @@ public class La extends Application
     {
         super.onCreate();
 		/** init */
-        new UCEHandler.Builder(this).build();
+        new UCEHandler.Builder(this).setEmailAddresses("a@b.com").setOtherInfo("反馈QQ","https://jq.qq.com/?_wv=1027&k=bVTXMuyJ").build();
 
     }
 }

@@ -1,5 +1,5 @@
 /*
- * 崩溃友好互交Activity
+ * 崩溃友好互交界面
  * Copyright (C) 2020 lian1581
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,140 +17,126 @@
  */
 package fun.syomie.uce_handler;
 
+import android.app.*;
 import android.content.*;
+import android.net.*;
+import android.os.*;
+import android.view.*;
+import android.view.View.*;
+import android.widget.*;
+import java.util.*;
 
-import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.AlertDialog;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.Toast;
-import java.util.List;
-
-public class LibraryActivity extends Activity 
+public class LibraryActivity extends Activity implements OnClickListener
 {
-    String[] eMail;
-    String feedback="";
+    String[] eMail, otherInfo;
+	String feedback="";
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate( Bundle savedInstanceState ){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.library);
-        Button btn1= findViewById(R.id.show),
-            btn2= findViewById(R.id.copy),
-            btn3= findViewById(R.id.send),
-            btn4= findViewById(R.id.restart),
-            btn5= findViewById(R.id.close);
+        Button showLog= findViewById(R.id.show),
+            copyLog= findViewById(R.id.copy),
+            sendLog= findViewById(R.id.send),
+            restart= findViewById(R.id.restart),
+			other= findViewById(R.id.otherButton),
+            closeAct= findViewById(R.id.close);
         Intent i=getIntent();
         feedback = i.getStringExtra("feedback");
         eMail = i.getStringArrayExtra("eMail");
-        btn1.setOnClickListener(new OnClick());
-        btn2.setOnClickListener(new OnClick());
-        btn3.setOnClickListener(new OnClick());
-        btn4.setOnClickListener(new OnClick());
-        btn5.setOnClickListener(new OnClick());
+		if( i.hasExtra("OtherInfo") ){
+            otherInfo = i.getStringArrayExtra("OtherInfo");
+			other.setText(otherInfo[0]);
+			other.setVisibility(View.VISIBLE);
+			other.setOnClickListener(this);
+		}
+        showLog.setOnClickListener(this);
+        copyLog.setOnClickListener(this);
+        sendLog.setOnClickListener(this);
+        restart.setOnClickListener(this);
+        closeAct.setOnClickListener(this);
     }
-    private class OnClick implements OnClickListener
-    {
 
-        @Override
-        public void onClick(View p1)
-        {
-            int vid= p1.getId();
-            if (vid == R.id.copy) copy();
-            if (vid == R.id.send) send();
-            if (vid == R.id.restart) restartApplication();
-            if (vid == R.id.close) close();
-            if (vid == R.id.show) showLog();
+	@Override
+	public void onClick( View p1 ){
+        int id= p1.getId();
+        if( id == R.id.copy ) copy();
+        if( id == R.id.send ) send();
+        if( id == R.id.restart ) restartApplication();
+        if( id == R.id.otherButton ) openOther(otherInfo[1]);
+        if( id == R.id.close ) finish();
+        if( id == R.id.show ) showLog();
+	}
+
+	private void showLog( ){
+		// 通过AlertDialog.Builder这个类来实例化我们的一个AlertDialog的对象
+		AlertDialog.Builder builder = new AlertDialog.Builder(LibraryActivity.this);
+		builder.setTitle(getString(R.string.Show_Log));
+		builder.setMessage(feedback);
+		builder.setPositiveButton(getString(R.string.Copy_Log),new DialogInterface.OnClickListener()
+			{
+				@Override
+				public void onClick( DialogInterface dialog,int which ){
+					copy();
+				}
+			});
+		builder.setNegativeButton(getString(R.string.Send_Log),new DialogInterface.OnClickListener()
+			{
+				@Override
+				public void onClick( DialogInterface dialog,int which ){
+					send();
+				}
+			});
+		builder.show(); 
+	}
+
+	private void copy( ){
+		ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+		ClipData mClipData = ClipData.newPlainText("Feedback",feedback);
+		cm.setPrimaryClip(mClipData);
+	}
+
+	private void restartApplication( ){  
+		final Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());  
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);  
+		startActivity(intent);
+	}  
+
+	void openOther( String str ){
+        if( str.isEmpty() ){
+            Toast.makeText(LibraryActivity.this,getString(R.string.Contact_Fail),Toast.LENGTH_LONG).show();
+            return;
+		}
+		copy();
+		Uri uri=Uri.parse(str);
+		Intent intent=new Intent(Intent.ACTION_VIEW,uri);
+		startActivity(intent);
+        super.finish();
+	}
+
+    @Override
+    public void finish( ){
+        super.finish();
+        ActivityManager am = (ActivityManager)getSystemService(getApplication().ACTIVITY_SERVICE);
+        List<ActivityManager.AppTask> appTaskList=  am.getAppTasks();
+        for( ActivityManager.AppTask at:appTaskList ){
+            at.finishAndRemoveTask();
         }
-
-
-
-        private void showLog()
-        {
-            // 通过AlertDialog.Builder这个类来实例化我们的一个AlertDialog的对象
-            AlertDialog.Builder builder = new AlertDialog.Builder(LibraryActivity.this);
-            // 设置Title的图标
-            // builder.setIcon(R.drawable.ic_launcher);
-            // 设置Title的内容
-            builder.setTitle(getString(R.string.Show_Log));
-            // 设置Content来显示一个信息
-            builder.setMessage(feedback);
-            // 设置一个PositiveButton
-            builder.setPositiveButton(getString(R.string.Copy_Log), new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        // 复制
-                        copy();
-                    }
-                });
-            // 设置一个NegativeButton
-            builder.setNegativeButton(getString(R.string.Send_Log), new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        // 发送
-                        send();
-                    }
-                });
-            // 显示出该对话框
-            builder.show(); 
-        }
-
-        private void copy()
-        {
-            // 获取系统剪切板
-            ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-            // 创建普通字符型ClipData
-            ClipData mClipData = ClipData.newPlainText("Feedback", feedback);
-            // 将ClipData内容放到系统剪贴板里。
-            cm.setPrimaryClip(mClipData);
-        }
-
-        private void restartApplication()
-        {  
-            final Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());  
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);  
-            startActivity(intent);
-            finish();
-            /**杀死整个进程**/
-            android.os.Process.killProcess(android.os.Process.myPid());
-        }  
-
-        private void send()
-        {
-            if (null == eMail || eMail.toString().isEmpty()) {
-                Toast.makeText(LibraryActivity.this, getString(R.string.Contact_Fail), Toast.LENGTH_LONG).show();
-                return;
-            }
-            Intent intent = new Intent(Intent.ACTION_SEND);
-            intent.putExtra(Intent.EXTRA_EMAIL, eMail);
-            intent.putExtra(Intent.EXTRA_CC, eMail); // 抄送人
-            intent.putExtra(Intent.EXTRA_SUBJECT, getPackageName() + ":Crash feedback"); // 主题
-            intent.putExtra(Intent.EXTRA_TEXT, feedback); // 正文
-            intent.setType("message/rfc822");
-            startActivity(Intent.createChooser(intent, getString(R.string.Select_Mail_Application)));
-        }
-
-        private void close()
-        {
-            // 通过Context获取ActivityManager
-            ActivityManager activityManager = (ActivityManager) getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
-            // 通过ActivityManager获取任务栈
-            List appTaskList = activityManager.getAppTasks();
-            // 逐个关闭Activity
-            while (appTaskList.size() > 0) {
-                ActivityManager.AppTask tk=(ActivityManager.AppTask) appTaskList.get(0);
-                tk.finishAndRemoveTask();
-            }
-            finish();
-            // 杀死整个进程
-            android.os.Process.killProcess(android.os.Process.myPid());
-        }
+        System.exit(0);
     }
+
+	private void send( ){
+		if( null == eMail || eMail.toString().isEmpty() ){
+			Toast.makeText(LibraryActivity.this,getString(R.string.Contact_Fail),Toast.LENGTH_LONG).show();
+			return;
+		}
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.putExtra(Intent.EXTRA_EMAIL,eMail);
+		intent.putExtra(Intent.EXTRA_CC,eMail); // 抄送人
+		intent.putExtra(Intent.EXTRA_SUBJECT,getPackageName() + ":Crash feedback"); // 主题
+		intent.putExtra(Intent.EXTRA_TEXT,feedback); // 正文
+		intent.setType("message/rfc822");
+		startActivity(Intent.createChooser(intent,getString(R.string.Select_Mail_Application)));
+        super.finish();
+	}
 }

@@ -7,8 +7,8 @@ android {
         applicationId "fun.syomie.uceh_demo"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 2
-        versionName "1.1.0"
+        versionCode 3
+        versionName "1.2.0"
     }
     buildTypes {
         release {
@@ -19,6 +19,6 @@ android {
 }
 
 dependencies {
-	implementation 'com.github.syomie:uce_handler:1.+'
+    implementation project(':uce_handler')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

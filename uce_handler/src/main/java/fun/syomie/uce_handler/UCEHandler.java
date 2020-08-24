@@ -25,6 +25,7 @@ import android.util.Log;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.*;
 
 public class UCEHandler implements Thread.UncaughtExceptionHandler
 {   
@@ -36,8 +37,11 @@ public class UCEHandler implements Thread.UncaughtExceptionHandler
     private static boolean isUCEHEnabled = true;
     private static String[] emailAddresses;
     private static UCEHandler mInstance;
-
     private static final String TAG="UCEHandler";
+
+	private static String[] otherInfo;
+
+ 
 
     private UCEHandler()
     {
@@ -50,6 +54,7 @@ public class UCEHandler implements Thread.UncaughtExceptionHandler
             mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
             isUCEHEnabled = builder.isUCEHEnabled;
             emailAddresses = builder.emailAddresses;
+			otherInfo=builder.otherInfo;
             mContext = builder.context;
             if (isUCEHEnabled) {
                 Log.i(TAG, "Enabled.");
@@ -103,8 +108,8 @@ public class UCEHandler implements Thread.UncaughtExceptionHandler
 
         Bundle ie=new Bundle();
         ie.putStringArray("eMail", emailAddresses);
+		if (null!=otherInfo) ie.putStringArray("OtherInfo",otherInfo);
         ie.putString("feedback", devInfor + error);
-
         // 跳转崩溃界面
         Intent intent = new Intent(mContext, LibraryActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -119,11 +124,22 @@ public class UCEHandler implements Thread.UncaughtExceptionHandler
         private Context context;
         private boolean isUCEHEnabled = true;
         private String[] emailAddresses;
-
+		private String[] otherInfo;
         public Builder(Context context)
         {
             this.context = context;
         }
+		
+		/** 设置第三方应用反馈。
+		  * @param name 简短名称
+          * @param uriStr uri字符
+		  */
+		public Builder setOtherInfo(String name,String uriStr)
+		{
+            
+			this.otherInfo = new String[]{name,uriStr};
+			return this;
+		}
         /** 设置崩溃后是否由ucehandler处理 */
         public Builder setUCEHEnabled(boolean isUCEHEnabled)
         {
