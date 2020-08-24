@@ -30,6 +30,7 @@ public class CrashInforCollect
     /** 返回收集的设备信息 */
     public static Spanned getCollectResults(Context ctx)
     {
+        Spanned result;
         String language=getLanguage(),
             systemVersionNumber=getSystemVersionNumber(),
             modelOfDevice=getModelOfDevice(),
@@ -37,8 +38,12 @@ public class CrashInforCollect
             deviceManufacturer=getDeviceManufacturer(),
             motherboardName=getMotherboardName(),
             deviceManufacturerName=getDeviceManufacturerName();
-        return Html.fromHtml(ctx.getString(R.string.format_device_infor, deviceManufacturerName, deviceManufacturer, modelOfDevice,
-                                           deviceName, motherboardName, systemVersionNumber, language));
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(ctx.getString(R.string.format_device_infor,deviceManufacturerName,deviceManufacturer,modelOfDevice, deviceName, motherboardName, systemVersionNumber, language),Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml(ctx.getString(R.string.format_device_infor, deviceManufacturerName, deviceManufacturer, modelOfDevice, deviceName, motherboardName, systemVersionNumber, language));
+        }
+        return result;
     }
 
     /** 获取当前语言 */
