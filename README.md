@@ -1,6 +1,7 @@
 [![Release](https://jitpack.io/v/syomie/uce_handler.svg)](https://jitpack.io/#syomie/uce_handler) [![](https://jitpack.io/v/syomie/uce_handler/month.svg)](https://jitpack.io/#syomie/uce_handler) [![](https://jitpack.io/v/syomie/uce_handler/week.svg)](https://jitpack.io/#syomie/uce_handler)
+**因墙加厚，后续更新(如果有需要的话)将放在[gitee/uce_handler](https://gitee.com/syomie/uce_handler)
 ## 入门
-将此库添加到您的Android项目并在Application类中对其进行初始化. 此外,您可以添加开发人员的电子邮件地址，这些地址将获取崩溃日志的电子邮件以及附加的崩溃信息。
+将此库添加到您的Android项目并在Application类中对其进行初始化. 此外,您可以添加电子邮件地址和其他方式用于反馈(见下)。
 ##  在您项目的根build.gradle文件的适当位置加入jitpack库:
 ```
     allprojects {
